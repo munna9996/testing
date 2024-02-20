@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Rental</title>
+    <style>
+        /* Resetting default margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            background-color: #333; /* Dark background color */
+            padding: 10px; /* Padding for the navbar */
+        }
+
+        /* Container for navbar content */
+        .navbar-container {
+            display: flex; /* Use flexbox */
+            justify-content: space-between; /* Distribute items evenly along the main axis */
+            align-items: center; /* Center items vertically */
+            max-width: 1200px; /* Limit the width of the navbar content */
+            margin: 0 auto; /* Center the container */
+        }
+
+        /* Logo styles */
+        .logo {
+            color: #fff; /* Text color */
+            font-size: 24px; /* Font size */
+            font-weight: bold; /* Bold font weight */
+        }
+
+        /* Navigation links */
+        .nav-links {
+            display: flex; /* Use flexbox */
+            list-style-type: none; /* Remove default list styling */
+        }
+
+        .nav-links li {
+            margin-right: 20px; /* Spacing between navigation items */
+        }
+
+        .nav-links a {
+            color: #fff; /* Text color */
+            text-decoration: none; /* Remove default underline */
+            font-size: 18px; /* Font size */
+            transition: color 0.3s; /* Smooth color transition on hover */
+        }
+
+        .nav-links a:hover {
+            color: #4CAF50; /* Change text color on hover */
+        }
+
+        /* Background image */
+        body {
+            background-image: url('background.jpg'); /* Add background image */
+            background-size: cover; /* Cover the entire viewport */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat; /* Do not repeat the background image */
+            height: 100vh; /* Set height to full viewport height */
+        }
+
+        /* Container for form */
+        .form-container {
+            display: flex; /* Use flexbox */
+            justify-content: flex-start; /* Align items to the left */
+            align-items: center; /* Center items vertically */
+            height: 100vh; /* Make the container take up full height */
+            padding: 20px; /* Add padding for spacing */
+        }
+
+        /* Form styles */
+        .booking-form {
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+            padding: 40px; /* Padding for the form */
+            border-radius: 10px; /* Rounded corners */
+            max-width: 400px; /* Limit the width of the form */
+            width: 100%; /* Make the form expand to fill its container */
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+        }
+
+        .form-title {
+            text-align: center; /* Center-align the title */
+            margin-bottom: 20px; /* Add some space below the title */
+        }
+
+        .form-control {
+            margin-bottom: 20px; /* Spacing between form controls */
+        }
+
+        .form-control label {
+            display: block; /* Display labels as block elements */
+            font-weight: bold; /* Bold font weight for labels */
+            margin-bottom: 5px; /* Add space below labels */
+        }
+
+        .form-control input[type="text"],
+        .form-control input[type="number"],
+        .form-control input[type="date"],
+        .form-control input[type="time"],
+        .form-control input[type="tel"] {
+            width: 100%; /* Make inputs fill the available width */
+            padding: 100px; /* Increase padding for inputs */
+            border: 1px solid #ccc; /* Add border */
+            border-radius: 5px; /* Rounded corners */
+        }
+
+        .form-control button {
+            background-color: #007bff; /* Button background color */
+            color: #fff; /* Button text color */
+            border: none; /* Remove button border */
+            padding: 10px 20px; /* Padding for button */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Add cursor pointer */
+            width: 100%; /* Make button fill the width */
+        }
+
+        .form-control button:hover {
+            background-color: #0056b3; /* Darken button color on hover */
+        }
+
+        /* Media queries for responsive design */
+        @media only screen and (max-width: 768px) {
+            /* Form container styles for mobile */
+            .form-container {
+                flex-direction: column; /* Stack items vertically */
+                align-items: flex-start; /* Align items to the left */
+                padding: 40px; /* Add padding for spacing */
+            }
+
+            /* Background image styles for mobile */
+            body {
+                background-position: top; /* Position background image at the top */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="navbar-container">
+        <!-- Logo -->
+        <span class="logo">Car Rental</span>
+
+        <!-- Navigation links -->
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="form-container">
+    <form class="booking-form">
+        <h2 class="form-title">Book Your Car Rental</h2>
+
+        <div class="form-control">
+            <label for="pickup-location">Pickup Location:</label>
+            <input type="text" id="pickup-location" name="pickup-location" placeholder="Enter pickup location" required>
+        </div>
+
+        <div class="form-control">
+            <label for="drop-location">Drop Location:</label>
+            <input type="text" id="drop-location" name="drop-location" placeholder="Enter drop location" required>
+        </div>
+
+        <div class="form-control">
+            <label for="drop-location">Drop Location:</label>
+            <input type="text" id="drop-location" name="drop-location" placeholder="Enter drop location" required>
+        </div>
+
+        <div class="form-control">
+            <label for="mobile">Mobile Number:</label>
+            <input type="tel" id="mobile" name="mobile" placeholder="Enter mobile number" required>
+        </div>
+
+        <div class="form-control">
+            <button type="submit">Explore Cabs</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
