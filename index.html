@@ -52,6 +52,17 @@
                 // Update the input field with the address
                 document.getElementById('pickup').value = address;
             });
+
+        // Suggest addresses based on the clicked location
+        fetch('https://api.mapbox.com/search/searchbox/v1/suggest?q=' + coordinates.lat + ',' + coordinates.lng + '&language=en&session_token=09b1315c-6ecf-4f31-88dc-7b7d6e80351d&access_token=' + mapboxgl.accessToken)
+            .then(response => response.json())
+            .then(data => {
+                // Extract suggested addresses from the response
+                var suggestions = data.features.map(feature => feature.place_name);
+
+                // Log or use the suggestions as needed
+                console.log(suggestions);
+            });
     });
 </script>
 
