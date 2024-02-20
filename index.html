@@ -49,13 +49,8 @@
                 // Extract the address from the response
                 var address = data.features[0].place_name;
 
-                // Check if input field for pickup or dropoff is currently active
-                var activeInput = document.activeElement;
-                if (activeInput.id === 'pickup') {
-                    document.getElementById('pickup').value = address;
-                } else if (activeInput.id === 'dropoff') {
-                    document.getElementById('dropoff').value = address;
-                }
+                // Update the input field with the address
+                document.getElementById('pickup').value = address;
             });
     });
 </script>
