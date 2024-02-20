@@ -1,222 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>  
-    
-
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MapmyIndia Matrix API Form</title>
-    <link rel="stylesheet" href="styles.css">
-
-    <!-- Add a link to the FontAwesome library for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-    <!-- Add MapmyIndia API script -->
-    <script src="https://apis.mapmyindia.com/advancedmaps/v1/c3c1dae762bff28c928a8a46cb6ef07f/map_load?v=1.5"></script>
-
+    <title>Mapbox Geocoding Example</title>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
     <style>
-        /* Your existing CSS styles */
-        /* Resetting default margin and padding */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background-image: url(''); /* Add your body background image URL here */
-            background-size: cover; /* Cover the entire background */
-            background-position: center; /* Center the background image */
-            margin: 0; /* Remove default margin */
-        }
-
-        .container {
-            position: absolute; /* Change position to absolute */
-            top: 50%; /* Position from the top */
-            left: 50%; /* Position from the left */
-            transform: translate(-50%, -50%); /* Center the container horizontally and vertically */
-            background-image: url('form_background.jpg'); /* Add your form background image URL here */
-            background-size: cover; /* Cover the entire container */
-            background-position: center; /* Center the background image */
-            padding: 20px; /* Add padding to the container */
-            border-radius: 10px; /* Add border radius */
-        }
-
-        @media only screen and (max-width: 768px) {
-            .container {
-                position: relative; /* Change position to relative for mobile */
-                margin: 20px; /* Add some margin for spacing */
-                top: auto;
-                left: auto;
-                transform: none;
-            }
-        }
-
-        form {
-            width: 100%; /* Set form width to 100% */
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .input-icon {
-            position: relative;
-        }
-
-        .input-icon input[type="text"] {
-            width: calc(100% - 30px); /* Adjust width to accommodate icon */
-            padding: 8px 30px 8px 8px; /* Add padding for the icon */
-        }
-
-        .input-icon i {
-            position: absolute;
-            top: 50%;
-            right: 8px;
-            transform: translateY(-50%);
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
+        /* Set the size of the map */
         #map {
-            height: 300px; /* Set the height of the map */
-            width: 100%; /* Set the width of the map */
-            margin-top: 20px; /* Add some margin on top of the map */
-            border-radius: 5px; /* Add border radius to the map container */
-        }
-
-        /* Additional styles for auto-suggestion dropdown */
-        .suggestions {
-            position: absolute;
-            z-index: 1000;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            width: calc(100% - 16px); /* Adjust width */
-            max-height: 200px; /* Max height for scrolling */
-            overflow-y: auto; /* Enable vertical scrolling */
-            margin-top: -1px; /* Offset border */
-        }
-
-        .suggestion-item {
-            padding: 10px;
-            cursor: pointer;
-        }
-
-        .suggestion-item:hover {
-            background-color: #f4f4f4;
+            width: 100%;
+            height: 400px;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <form id="distanceForm" onsubmit="calculateDistance(event)">
-        <div class="form-group input-icon">
-            <label for="pickup">Pickup:</label>
-            <input type="text" id="pickup" name="pickup" placeholder="Enter pickup location" oninput="autoSuggestPlaces(this.value, 'pickup')">
-            <i class="fas fa-map-marker-alt"></i> <!-- Add map marker icon -->
-            <div id="pickupSuggestions" class="suggestions"></div> <!-- Suggestions dropdown for pickup -->
-        </div>
-        <div class="form-group input-icon">
-            <label for="dropoff">Dropoff:</label>
-            <input type="text" id="dropoff" name="dropoff" placeholder="Enter dropoff location" oninput="autoSuggestPlaces(this.value, 'dropoff')">
-            <i class="fas fa-map-marker-alt"></i> <!-- Add map marker icon -->
-            <div id="dropoffSuggestions" class="suggestions"></div> <!-- Suggestions dropdown for dropoff -->
-        </div>
-        <button type="submit">Explore Cabs </button>
-    </form>
-    <!-- Map container -->
-    <div id="map"></div>
-</div>
+<div id="map"></div>
 
+<form>
+    <label for="pickup">Pickup Location:</label>
+    <input type="text" id="pickup" name="pickup" placeholder="Click on the map to select">
+    <br>
+    <label for="dropoff">Dropoff Location:</label>
+    <input type="text" id="dropoff" name="dropoff" placeholder="Click on the map to select">
+</form>
+
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
 <script>
-    // Initialize MapmyIndia map
-    var map = new MapmyIndia.Map('map', {
-        center: [28.61, 77.23], // Initial map center coordinates
-        zoom: 10 // Initial zoom level
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYmFzaGE3ODYiLCJhIjoiY2xzdW4ybjNrMGNncDJxcXR0MWh3YjZydyJ9.jHW1sZOcBDT0yi5sARiElw';
+
+    // Initialize map
+    var map = new mapboxgl.Map({
+        container: 'map', // container id
+        style: 'mapbox://styles/mapbox/streets-v11', // style URL
+        center: [-74.5, 40], // starting position [lng, lat]
+        zoom: 9 // starting zoom
     });
 
-    // Function to perform auto-suggestion for places
-    function autoSuggestPlaces(query, inputType) {
-        // Perform auto-suggestion for places based on the query using MapmyIndia autoSuggest API
-        var autoSuggestOptions = {
-            input: query,
-            location: map.getCenter(),
-            radius: 100000 // You can adjust the radius as needed
-        };
+    // Add click event listener to the map
+    map.on('click', function(e) {
+        // Get the coordinates of the clicked point
+        var coordinates = e.lngLat;
 
-        // Perform auto-suggestion based on input type
-        if (inputType === 'pickup') {
-            var pickupSuggestions = document.getElementById('pickupSuggestions');
-            MapmyIndia.autoSuggest(autoSuggestOptions, function (response) {
-                pickupSuggestions.innerHTML = ''; // Clear previous suggestions
-                response.suggestedLocations.forEach(function (suggestion) {
-                    var suggestionItem = document.createElement('div');
-                    suggestionItem.classList.add('suggestion-item');
-                    suggestionItem.textContent = suggestion.placeName;
-                    suggestionItem.addEventListener('click', function () {
-                        document.getElementById('pickup').value = suggestion.placeName;
-                        pickupSuggestions.innerHTML = ''; // Clear suggestions after selection
-                    });
-                    pickupSuggestions.appendChild(suggestionItem);
-                });
+        // Reverse geocode the coordinates to get the address
+        fetch('https://api.mapbox.com/geocoding/v5/mapbox.places/' + coordinates.lng + ',' + coordinates.lat + '.json?access_token=' + mapboxgl.accessToken)
+            .then(response => response.json())
+            .then(data => {
+                // Extract the address from the response
+                var address = data.features[0].place_name;
+
+                // Check if input field for pickup or dropoff is currently active
+                var activeInput = document.activeElement;
+                if (activeInput.id === 'pickup') {
+                    document.getElementById('pickup').value = address;
+                } else if (activeInput.id === 'dropoff') {
+                    document.getElementById('dropoff').value = address;
+                }
             });
-        } else if (inputType === 'dropoff') {
-            var dropoffSuggestions = document.getElementById('dropoffSuggestions');
-            MapmyIndia.autoSuggest(autoSuggestOptions, function (response) {
-                dropoffSuggestions.innerHTML = ''; // Clear previous suggestions
-                response.suggestedLocations.forEach(function (suggestion) {
-                    var suggestionItem = document.createElement('div');
-                    suggestionItem.classList.add('suggestion-item');
-                    suggestionItem.textContent = suggestion.placeName;
-                    suggestionItem.addEventListener('click', function () {
-                        document.getElementById('dropoff').value = suggestion.placeName;
-                        dropoffSuggestions.innerHTML = ''; // Clear suggestions after selection
-                    });
-                    dropoffSuggestions.appendChild(suggestionItem);
-                });
-            });
-        }
-    }
-
-    function calculateDistance(event) {
-        event.preventDefault(); // Prevent form submission
-
-        // Retrieve input values
-        var pickup = document.getElementById("pickup").value;
-        var dropoff = document.getElementById("dropoff").value;
-
-        // Simulate API call to calculate distance (replace with actual API call)
-        var distance = simulateDistanceCalculation(pickup, dropoff);
-
-        // Redirect to the next page with all data as query parameters
-        window.location.href = "next_page.html?pickup=" + encodeURIComponent(pickup) + "&dropoff=" + encodeURIComponent(dropoff) + "&distance=" + distance;
-    }
-
-    function simulateDistanceCalculation(pickup, dropoff) {
-        // Simulate distance calculation (replace with actual API call)
-        // For demonstration purposes, let's just return a random number between 1 and 100
-        return Math.floor(Math.random() * 100) + 1;
-    }
+    });
 </script>
 
 </body>
