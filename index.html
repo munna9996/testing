@@ -3,8 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Rental</title>
+    <title>MapmyIndia Matrix API Form</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Add a link to the FontAwesome library for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Add MapmyIndia API script -->
+    <script src="https://apis.mapmyindia.com/advancedmaps/v1/c3c1dae762bff28c928a8a46cb6ef07f/map_load?v=1.5"></script>
+
     <style>
+        /* Your existing CSS styles */
         /* Resetting default margin and padding */
         * {
             margin: 0;
@@ -12,179 +21,201 @@
             box-sizing: border-box;
         }
 
-        /* Navbar styles */
-        .navbar {
-            background-color: #333; /* Dark background color */
-            padding: 10px; /* Padding for the navbar */
-        }
-
-        /* Container for navbar content */
-        .navbar-container {
-            display: flex; /* Use flexbox */
-            justify-content: space-between; /* Distribute items evenly along the main axis */
-            align-items: center; /* Center items vertically */
-            max-width: 1200px; /* Limit the width of the navbar content */
-            margin: 0 auto; /* Center the container */
-        }
-
-        /* Logo styles */
-        .logo {
-            color: #fff; /* Text color */
-            font-size: 24px; /* Font size */
-            font-weight: bold; /* Bold font weight */
-        }
-
-        /* Navigation links */
-        .nav-links {
-            display: flex; /* Use flexbox */
-            list-style-type: none; /* Remove default list styling */
-        }
-
-        .nav-links li {
-            margin-right: 20px; /* Spacing between navigation items */
-        }
-
-        .nav-links a {
-            color: #fff; /* Text color */
-            text-decoration: none; /* Remove default underline */
-            font-size: 18px; /* Font size */
-            transition: color 0.3s; /* Smooth color transition on hover */
-        }
-
-        .nav-links a:hover {
-            color: #4CAF50; /* Change text color on hover */
-        }
-
-        /* Background image */
         body {
-            background-image: url('background.jpg'); /* Add background image */
-            background-size: cover; /* Cover the entire viewport */
+            font-family: Arial, sans-serif;
+            background-image: url(''); /* Add your body background image URL here */
+            background-size: cover; /* Cover the entire background */
             background-position: center; /* Center the background image */
-            background-repeat: no-repeat; /* Do not repeat the background image */
-            height: 100vh; /* Set height to full viewport height */
+            margin: 0; /* Remove default margin */
         }
 
-        /* Container for form */
-        .form-container {
-            display: flex; /* Use flexbox */
-            justify-content: flex-start; /* Align items to the left */
-            align-items: center; /* Center items vertically */
-            height: 100vh; /* Make the container take up full height */
-            padding: 20px; /* Add padding for spacing */
+        .container {
+            position: absolute; /* Change position to absolute */
+            top: 50%; /* Position from the top */
+            left: 50%; /* Position from the left */
+            transform: translate(-50%, -50%); /* Center the container horizontally and vertically */
+            background-image: url('form_background.jpg'); /* Add your form background image URL here */
+            background-size: cover; /* Cover the entire container */
+            background-position: center; /* Center the background image */
+            padding: 20px; /* Add padding to the container */
+            border-radius: 10px; /* Add border radius */
         }
 
-        /* Form styles */
-        .booking-form {
-            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
-            padding: 40px; /* Padding for the form */
-            border-radius: 10px; /* Rounded corners */
-            max-width: 400px; /* Limit the width of the form */
-            width: 100%; /* Make the form expand to fill its container */
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
-        }
-
-        .form-title {
-            text-align: center; /* Center-align the title */
-            margin-bottom: 20px; /* Add some space below the title */
-        }
-
-        .form-control {
-            margin-bottom: 20px; /* Spacing between form controls */
-        }
-
-        .form-control label {
-            display: block; /* Display labels as block elements */
-            font-weight: bold; /* Bold font weight for labels */
-            margin-bottom: 5px; /* Add space below labels */
-        }
-
-        .form-control input[type="text"],
-        .form-control input[type="number"],
-        .form-control input[type="date"],
-        .form-control input[type="time"],
-        .form-control input[type="tel"] {
-            width: 100%; /* Make inputs fill the available width */
-            padding: 100px; /* Increase padding for inputs */
-            border: 1px solid #ccc; /* Add border */
-            border-radius: 5px; /* Rounded corners */
-        }
-
-        .form-control button {
-            background-color: #007bff; /* Button background color */
-            color: #fff; /* Button text color */
-            border: none; /* Remove button border */
-            padding: 10px 20px; /* Padding for button */
-            border-radius: 5px; /* Rounded corners */
-            cursor: pointer; /* Add cursor pointer */
-            width: 100%; /* Make button fill the width */
-        }
-
-        .form-control button:hover {
-            background-color: #0056b3; /* Darken button color on hover */
-        }
-
-        /* Media queries for responsive design */
         @media only screen and (max-width: 768px) {
-            /* Form container styles for mobile */
-            .form-container {
-                flex-direction: column; /* Stack items vertically */
-                align-items: flex-start; /* Align items to the left */
-                padding: 40px; /* Add padding for spacing */
+            .container {
+                position: relative; /* Change position to relative for mobile */
+                margin: 20px; /* Add some margin for spacing */
+                top: auto;
+                left: auto;
+                transform: none;
             }
+        }
 
-            /* Background image styles for mobile */
-            body {
-                background-position: top; /* Position background image at the top */
-            }
+        form {
+            width: 100%; /* Set form width to 100% */
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .input-icon {
+            position: relative;
+        }
+
+        .input-icon input[type="text"] {
+            width: calc(100% - 30px); /* Adjust width to accommodate icon */
+            padding: 8px 30px 8px 8px; /* Add padding for the icon */
+        }
+
+        .input-icon i {
+            position: absolute;
+            top: 50%;
+            right: 8px;
+            transform: translateY(-50%);
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #map {
+            height: 300px; /* Set the height of the map */
+            width: 100%; /* Set the width of the map */
+            margin-top: 20px; /* Add some margin on top of the map */
+            border-radius: 5px; /* Add border radius to the map container */
+        }
+
+        /* Additional styles for auto-suggestion dropdown */
+        .suggestions {
+            position: absolute;
+            z-index: 1000;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            width: calc(100% - 16px); /* Adjust width */
+            max-height: 200px; /* Max height for scrolling */
+            overflow-y: auto; /* Enable vertical scrolling */
+            margin-top: -1px; /* Offset border */
+        }
+
+        .suggestion-item {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .suggestion-item:hover {
+            background-color: #f4f4f4;
         }
     </style>
 </head>
 <body>
 
-<div class="navbar">
-    <div class="navbar-container">
-        <!-- Logo -->
-        <span class="logo">Car Rental</span>
-
-        <!-- Navigation links -->
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </div>
-</div>
-
-<div class="form-container">
-    <form class="booking-form">
-        <h2 class="form-title">Book Your Car Rental</h2>
-
-        <div class="form-control">
-            <label for="pickup-location">Pickup Location:</label>
-            <input type="text" id="pickup-location" name="pickup-location" placeholder="Enter pickup location" required>
+<div class="container">
+    <form id="distanceForm" onsubmit="calculateDistance(event)">
+        <div class="form-group input-icon">
+            <label for="pickup">Pickup:</label>
+            <input type="text" id="pickup" name="pickup" placeholder="Enter pickup location" oninput="autoSuggestPlaces(this.value, 'pickup')">
+            <i class="fas fa-map-marker-alt"></i> <!-- Add map marker icon -->
+            <div id="pickupSuggestions" class="suggestions"></div> <!-- Suggestions dropdown for pickup -->
         </div>
-
-        <div class="form-control">
-            <label for="drop-location">Drop Location:</label>
-            <input type="text" id="drop-location" name="drop-location" placeholder="Enter drop location" required>
+        <div class="form-group input-icon">
+            <label for="dropoff">Dropoff:</label>
+            <input type="text" id="dropoff" name="dropoff" placeholder="Enter dropoff location" oninput="autoSuggestPlaces(this.value, 'dropoff')">
+            <i class="fas fa-map-marker-alt"></i> <!-- Add map marker icon -->
+            <div id="dropoffSuggestions" class="suggestions"></div> <!-- Suggestions dropdown for dropoff -->
         </div>
-
-        <div class="form-control">
-            <label for="drop-location">Drop Location:</label>
-            <input type="text" id="drop-location" name="drop-location" placeholder="Enter drop location" required>
-        </div>
-
-        <div class="form-control">
-            <label for="mobile">Mobile Number:</label>
-            <input type="tel" id="mobile" name="mobile" placeholder="Enter mobile number" required>
-        </div>
-
-        <div class="form-control">
-            <button type="submit">Explore Cabs</button>
-        </div>
+        <button type="submit">Explore Cabs </button>
     </form>
+    <!-- Map container -->
+    <div id="map"></div>
 </div>
+
+<script>
+    // Initialize MapmyIndia map
+    var map = new MapmyIndia.Map('map', {
+        center: [28.61, 77.23], // Initial map center coordinates
+        zoom: 10 // Initial zoom level
+    });
+
+    // Function to perform auto-suggestion for places
+    function autoSuggestPlaces(query, inputType) {
+        // Perform auto-suggestion for places based on the query using MapmyIndia autoSuggest API
+        var autoSuggestOptions = {
+            input: query,
+            location: map.getCenter(),
+            radius: 100000 // You can adjust the radius as needed
+        };
+
+        // Perform auto-suggestion based on input type
+        if (inputType === 'pickup') {
+            var pickupSuggestions = document.getElementById('pickupSuggestions');
+            MapmyIndia.autoSuggest(autoSuggestOptions, function (response) {
+                pickupSuggestions.innerHTML = ''; // Clear previous suggestions
+                response.suggestedLocations.forEach(function (suggestion) {
+                    var suggestionItem = document.createElement('div');
+                    suggestionItem.classList.add('suggestion-item');
+                    suggestionItem.textContent = suggestion.placeName;
+                    suggestionItem.addEventListener('click', function () {
+                        document.getElementById('pickup').value = suggestion.placeName;
+                        pickupSuggestions.innerHTML = ''; // Clear suggestions after selection
+                    });
+                    pickupSuggestions.appendChild(suggestionItem);
+                });
+            });
+        } else if (inputType === 'dropoff') {
+            var dropoffSuggestions = document.getElementById('dropoffSuggestions');
+            MapmyIndia.autoSuggest(autoSuggestOptions, function (response) {
+                dropoffSuggestions.innerHTML = ''; // Clear previous suggestions
+                response.suggestedLocations.forEach(function (suggestion) {
+                    var suggestionItem = document.createElement('div');
+                    suggestionItem.classList.add('suggestion-item');
+                    suggestionItem.textContent = suggestion.placeName;
+                    suggestionItem.addEventListener('click', function () {
+                        document.getElementById('dropoff').value = suggestion.placeName;
+                        dropoffSuggestions.innerHTML = ''; // Clear suggestions after selection
+                    });
+                    dropoffSuggestions.appendChild(suggestionItem);
+                });
+            });
+        }
+    }
+
+    function calculateDistance(event) {
+        event.preventDefault(); // Prevent form submission
+
+        // Retrieve input values
+        var pickup = document.getElementById("pickup").value;
+        var dropoff = document.getElementById("dropoff").value;
+
+        // Simulate API call to calculate distance (replace with actual API call)
+        var distance = simulateDistanceCalculation(pickup, dropoff);
+
+        // Redirect to the next page with all data as query parameters
+        window.location.href = "next_page.html?pickup=" + encodeURIComponent(pickup) + "&dropoff=" + encodeURIComponent(dropoff) + "&distance=" + distance;
+    }
+
+    function simulateDistanceCalculation(pickup, dropoff) {
+        // Simulate distance calculation (replace with actual API call)
+        // For demonstration purposes, let's just return a random number between 1 and 100
+        return Math.floor(Math.random() * 100) + 1;
+    }
+</script>
 
 </body>
 </html>
